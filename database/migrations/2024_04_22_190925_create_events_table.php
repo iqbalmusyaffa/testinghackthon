@@ -17,7 +17,7 @@ return new class extends Migration
             $table->string('nama_events');
             $table->unsignedBigInteger('kategori_id')->nullable();
             $table->foreign('kategori_id')->references('id')->on('kategoris');
-            $table->string('gambar_events');
+            $table->text('gambar_events');
             $table->date('tanggal_events');
             $table->text('deskripsi');
             $table->string('lokasi_events')->nullable();

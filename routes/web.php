@@ -8,7 +8,11 @@ use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\TagController;
 use App\Http\Controllers\CommentController;
 use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\EventsController;
+use App\Http\Controllers\HomeController;
+use App\Http\Controllers\KategoriController;
 use App\Http\Controllers\WelcomeController;
+use App\Models\Events;
 
 /*
 |--------------------------------------------------------------------------
@@ -36,7 +40,11 @@ Route::middleware('auth')->group(function () {
     Route::get('/profile/two-factor-auth/setup', [ProfileController::class, 'showTwoFactorAuthSetupForm'])->name('profile.two-factor-auth.setup');
     Route::post('/profile/two-factor-auth/enable', [ProfileController::class, 'enableTwoFactorAuth'])->name('profile.two-factor-auth.enable');
     Route::post('/profile/two-factor-auth/disable', [ProfileController::class, 'disableTwoFactorAuth'])->name('profile.two-factor-auth.disable');
+    Route::resource('kategoris', KategoriController::class);
+    Route::resource('events', EventsController::class);
 });
+
+
 Route::middleware('guest')->group(function () {
     // ...
     Route::get('auth/{provider}/redirect', [SocialiteController::class, 'loginSocial'])
