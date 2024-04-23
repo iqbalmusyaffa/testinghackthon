@@ -9,15 +9,11 @@
 
 ## About Project
 
-Tugas ini dibuat menggunakan laravel breze ,laravel socialite ,Laravel Fortify dengan laravel 10 
+code ini dibuat menggunakan laravel breze ,laravel socialite ,Laravel Fortify dengan laravel 10 
 fitur 
 login with google
 login with github
-simple blog
 2fa Autentikasi
-
-untuk database bisa menggunakan nama ini
-nama database : blogabc 
 
 Tools yang Digunakan 
 -Laragon
