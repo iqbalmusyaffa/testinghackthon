@@ -42,6 +42,7 @@ Route::middleware('auth')->group(function () {
     Route::post('/profile/two-factor-auth/disable', [ProfileController::class, 'disableTwoFactorAuth'])->name('profile.two-factor-auth.disable');
     Route::resource('kategoris', KategoriController::class);
     Route::resource('events', EventsController::class);
+
 });
 
 

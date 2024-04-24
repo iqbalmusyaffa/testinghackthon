@@ -30,7 +30,8 @@ class EventsController extends Controller
         $validated = $request->validated();
 
         if ($request->hasFile('gambar_events')) {
-            $filePath = Storage::disk('public')->put('images/events/gambar_events', $request->file('gambar_events'));
+            $file = $request->file('gambar_events');
+            $filePath = $file->store('images/events/gambar_events', 'public');
             $validated['gambar_events'] = $filePath;
         }
 
@@ -63,7 +64,8 @@ class EventsController extends Controller
         $validated = $request->validated();
 
         if ($request->hasFile('gambar_events')) {
-            $filePath = Storage::disk('public')->put('images/events/gambar_events', $request->file('gambar_events'));
+            $file = $request->file('gambar_events');
+            $filePath = $file->store('images/events/gambar_events', 'public');
             $validated['gambar_events'] = $filePath;
         }
 
@@ -90,5 +92,4 @@ class EventsController extends Controller
 
         return abort(500);
     }
-
 }

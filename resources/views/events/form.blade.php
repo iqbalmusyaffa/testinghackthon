@@ -1,7 +1,7 @@
 <x-app-layout>
     <x-slot name="header">
         <h2 class="font-semibold text-xl text-white leading-tight">
-            {{-- Use 'Edit' for edit mode and create for non-edit/create mode --}}
+            {{-- Gunakan 'Edit' untuk mode edit dan 'Create' untuk mode bukan edit/buat --}}
             {{ isset($event) ? 'Edit' : 'Create' }} Event
         </h2>
     </x-slot>
@@ -10,10 +10,10 @@
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
             <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
                 <div class="p-6 text-gray-900">
-                    {{-- don't forget to add multipart/form-data so we can accept file in our form --}}
+                    {{-- Jangan lupa tambahkan enctype="multipart/form-data" sehingga kami dapat menerima file dalam formulir kami --}}
                     <form method="post" action="{{ isset($event) ? route('events.update', $event->id) : route('events.store') }}" class="mt-6 space-y-6" enctype="multipart/form-data">
                         @csrf
-                        {{-- add @method('put') for edit mode --}}
+                        {{-- Tambahkan @method('put') untuk mode edit --}}
                         @isset($event)
                             @method('put')
                         @endisset
@@ -42,11 +42,21 @@
 
                         <!-- Gambar Event -->
                         <div>
-                            <label for="gambar_events" class="block text-gray-700 text-sm font-bold mb-2">Gambar Event</label>
-                            <input type="file" id="gambar_events" name="gambar_events" class="form-input">
-                            @if(isset($event) && $event->gambar_events)
-                                <img src="{{ asset(Storage::url($event->gambar_events)) }}" alt="Gambar Event" class="mt-2 max-w-full h-auto">
-                            @endif
+                            <x-input-label for="gambar_events" value="Gambar Event" />
+                            <label class="block mt-2">
+                                <span class="sr-only">Pilih gambar</span>
+                                <input type="file" id="gambar_events" name="gambar_events" class="block w-full text-sm text-slate-500
+                                    file:mr-4 file:py-2 file:px-4
+                                    file:rounded-full file:border-0
+                                    file:text-sm file:font-semibold
+                                    file:bg-violet-50 file:text-violet-700
+                                    hover:file:bg-violet-100
+                                "/>
+                            </label>
+                            <div class="shrink-0 my-2">
+                                <img id="gambar_events_preview" class="h-64 w-128 object-cover rounded-md" src="{{ isset($event) ? Storage::url($event->gambar_events) : '' }}" alt="Pratinjau gambar acara" />
+                            </div>
+                            <x-input-error class="mt-2" :messages="$errors->get('gambar_events')" />
                         </div>
 
                         <!-- Tanggal Event -->
@@ -107,11 +117,11 @@
         </div>
     </div>
     <script>
-        // create onchange event listener for gambar_events input
+        // Tambahkan event listener onchange untuk input gambar_events
         document.getElementById('gambar_events').onchange = function(evt) {
             const [file] = this.files
             if (file) {
-                // if there is an image, create a preview in gambar_events_preview
+                // Jika ada gambar, buat pratinjau di gambar_events_preview
                 document.getElementById('gambar_events_preview').src = URL.createObjectURL(file)
             }
         }
